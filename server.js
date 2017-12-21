@@ -79,22 +79,23 @@ const findSpecificRecord = function() {
     return User.find({ username: 'Kenny_the_boy' }, function(err, res) {
         if (err) throw err;
         console.log('Record you are looking for is ' + res);
-    })
+    });
 }
 
 const updateUserPassword = function() {
     return User.find({ username: 'Kenny_the_boy'})
         .then(function(user) {
-            console.log('Old password is ' + user[0].password);
-            console.log('Name ' + user[0].name);
-            user[0].password = 'newPassword';
-            console.log('New password is ' + user[0].password);
-            return user[0].save(function(err) {
+            let foundedUser = user[0];
+            console.log('Old password is ' + foundedUser.password);
+            console.log('Name ' + foundedUser.name);
+            foundedUser.password = 'newPassword';
+            console.log('New password is ' + foundedUser.password);
+            return foundedUser.save(function(err) {
                 if (err) throw err;
 
-                console.log('Uzytkownik ' + user[0].name + ' zostal pomyslnie zaktualizowany');
-            })
-        })
+                console.log('Uzytkownik ' + user[0] + ' zostal pomyslnie zaktualizowany');
+            });
+    });
 }
 
 const updateUsername = function() {
@@ -102,7 +103,7 @@ const updateUsername = function() {
         if (err) throw err;
 
         console.log('Nazwa użytkownika po aktualizacji to ' + user.username);
-    })
+    });
 }
 
 const findMarkAndDelete = function() {
@@ -111,7 +112,7 @@ const findMarkAndDelete = function() {
             return user.remove(function() {
                 console.log('User successfully deleted');
             });
-        })
+    });
 }
 
 const findKennyAndDelete = function() {
